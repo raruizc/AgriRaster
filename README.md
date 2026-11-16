@@ -1,33 +1,34 @@
-# AgriRaster: Raster Data Analysis - NDVI, Interpolation, and Clustering
-Project Description
-This repository contains a Jupyter notebook (AgriRaster.ipynb) that performs raster data analysis, focusing on the calculation of the Normalized Difference Vegetation Index (NDVI), interpolation, and clustering using unsupervised learning techniques. The project is designed to work with satellite or drone imagery and utilizes libraries such as rasterio, numpy, matplotlib, sklearn, and pykrige for data processing and analysis.
+# 🛰️ AgriRaster: NDVI, Kriging and Clustering of Aerial Imagery
 
-# Repository Contents
-AgriRaster.ipynb: Jupyter notebook containing the code for raster data analysis. It includes loading images, calculating NDVI, data interpolation, and clustering using DBSCAN.
+![Python](https://img.shields.io/badge/Python-Jupyter-3776AB)
+![License](https://img.shields.io/badge/License-MIT-green)
 
+A Jupyter notebook for **precision-agriculture raster analysis**. It downloads an open aerial image, computes a vegetation index, interpolates it with **kriging**, and segments the field into management zones with unsupervised clustering.
 
-# Requirements
-To run the Jupyter notebook, you will need to install the following Python libraries:
+| Region of interest | Vegetation index (kriging) | Clusters (DBSCAN) |
+|---|---|---|
+| ![ROI](cropped_raster.png) | ![Kriging](gndvi_kriging.png) | ![Clustering](gndvi_clustering.png) |
 
+## Workflow
 
-pip install rasterio numpy matplotlib scikit-learn pykrige requests
+1. **Download** an aerial/satellite image from [OpenAerialMap](https://openaerialmap.org/).
+2. **Load** the raster and crop a region of interest (ROI) with `rasterio`.
+3. **Compute vegetation indices** (NDVI / GNDVI) from the spectral bands.
+4. **Interpolate** the index surface with ordinary kriging (`pykrige`).
+5. **Cluster** pixels with **DBSCAN** (`scikit-learn`) to delineate homogeneous zones.
+6. **Visualize** every step with `matplotlib`.
 
-# Code Structure
+## How to run
 
-1. Library Import: Necessary libraries for raster data analysis, visualization, and clustering are imported.
+```bash
+git clone https://github.com/raruizc/AgriRaster.git
+cd AgriRaster
+pip install rasterio numpy matplotlib scikit-learn pykrige requests jupyter
+jupyter notebook AgriRaster.ipynb
+```
 
-2. Image Download: A satellite image is downloaded from OpenAerialMap.
+## Author
 
-3. Raster Image Loading: The raster image is loaded from a local file.
+**Ricardo Antonio Ruiz-Cardozo**: PhD candidate in Statistics and Agricultural Experimentation, ESALQ/USP.
 
-4. Region of Interest (ROI) Definition: A region of interest (ROI) within the raster image is defined.
-
-5. ROI Reading and Processing: The ROI is read and processed.
-
-6. Image Visualization: The raster image is visualized using matplotlib.
-
-7. NDVI Calculation: NDVI is calculated from the spectral bands of the image.
-
-8. Interpolation: Data interpolation is performed using Kriging.
-
-9. Clustering: The DBSCAN algorithm is applied to perform clustering on the raster data.
+Released under the [MIT License](LICENSE).
